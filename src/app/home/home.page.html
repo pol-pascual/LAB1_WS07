@@ -47,12 +47,26 @@
           <input type="number" id="score-input" name="score" class="form-control" placeholder="0 - 100" min="0" max="100" [(ngModel)]="score"/>
         </div>
 
+        <!-- Remarks and Notes -->
+        <div class="form-group">
+          <label for="remarks-input" class="form-label">Remarks and Notes</label>
+          <textarea id="remarks-input" name="remarks" class="form-control textarea-control" rows="3" placeholder="Enter remarks or notes..." [(ngModel)]="remarks"></textarea>
+        </div>
+
+        <!-- Attach Image or Video -->
+        <div class="form-group">
+          <label for="file-input" class="form-label">Attach Image or Video</label>
+          <input type="file" id="file-input" name="attachment" class="form-control file-input" accept="image/*,video/*" (change)="onFileChange($event)"/>
+        </div>
+
         <div class="form-actions">
-          <button type="submit" class="submit-btn" [disabled]="!selectedLearner || !selectedReportType">
+          <button type="submit" class="submit-btn">
             Submit Report
           </button>
         </div>
+
       </form>
+
     </div>
   </div>
 </ion-content>

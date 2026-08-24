@@ -26,14 +26,28 @@ export class HomePage {
     'Annual Performance Review'
   ];
 
+  remarks: string = '';
+  selectedFileName: string = '';
+
   isSubmitted: boolean = false;
   submittedData: any = null;
+
+  onFileChange(event: any) {
+    const file = event.target.files && event.target.files[0];
+    if (file) {
+      this.selectedFileName = file.name;
+    } else {
+      this.selectedFileName = '';
+    }
+  }
 
   onSubmit() {
     this.submittedData = {
       learner: this.selectedLearner,
       reportType: this.selectedReportType,
-      score: this.score
+      score: this.score,
+      remarks: this.remarks,
+      fileName: this.selectedFileName
     };
     this.isSubmitted = true;
   }
@@ -42,8 +56,11 @@ export class HomePage {
     this.selectedLearner = '';
     this.selectedReportType = '';
     this.score = null;
+    this.remarks = '';
+    this.selectedFileName = '';
     this.isSubmitted = false;
     this.submittedData = null;
   }
 }
+
 
