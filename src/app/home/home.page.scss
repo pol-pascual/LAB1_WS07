@@ -1,27 +1,166 @@
-#container {
-  text-align: center;
-
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+.page-bg {
+  --background: #f8fafc;
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 24px 12px;
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
+.report-card {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+  border: 1px solid #e2e8f0;
+  width: 100%;
+  max-width: 440px;
+  padding: 28px 24px;
+}
 
-  color: #8c8c8c;
+.card-header {
+  margin-bottom: 24px;
+}
 
+.card-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 6px 0;
+  letter-spacing: -0.3px;
+}
+
+.card-subtitle {
+  font-size: 14px;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.report-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1e293b;
+}
+
+.select-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.form-control {
+  width: 100%;
+  height: 48px;
+  padding: 0 16px;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 15px;
+  color: #0f172a;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+
+  &:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+  }
+
+  &::placeholder {
+    color: #94a3b8;
+  }
+}
+
+.select-control {
+  appearance: auto;
+  padding-right: 16px;
+  cursor: pointer;
+
+  &:invalid,
+  & option[value=""] {
+    color: #94a3b8;
+  }
+}
+
+/* Hide number input spinners for a cleaner look */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
   margin: 0;
 }
-
-#container a {
-  text-decoration: none;
+input[type="number"] {
+  -moz-appearance: textfield;
 }
+
+.form-actions {
+  margin-top: 8px;
+}
+
+.submit-btn {
+  width: 100%;
+  height: 48px;
+  background-color: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, opacity 0.2s;
+
+  &:hover:not(:disabled) {
+    background-color: #1d4ed8;
+  }
+
+  &:disabled {
+    background-color: #cbd5e1;
+    color: #94a3b8;
+    cursor: not-allowed;
+  }
+}
+
+.success-message {
+  margin-top: 20px;
+  padding: 16px;
+  background-color: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 10px;
+  color: #166534;
+
+  h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+
+  p {
+    margin: 4px 0;
+    font-size: 14px;
+  }
+}
+
+.reset-btn {
+  margin-top: 12px;
+  padding: 8px 16px;
+  background-color: #166534;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
