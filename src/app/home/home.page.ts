@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { ReportService } from '../services/report.service';
 
 @Component({
   selector: 'app-home',
@@ -10,6 +12,8 @@ export class HomePage {
   selectedLearner: string = '';
   selectedReportType: string = '';
   score: number | null = null;
+  remarks: string = '';
+  selectedFileName: string = '';
 
   learners: string[] = [
     'John Doe',
@@ -26,11 +30,13 @@ export class HomePage {
     'Annual Performance Review'
   ];
 
-  remarks: string = '';
-  selectedFileName: string = '';
-
   isSubmitted: boolean = false;
   submittedData: any = null;
+
+  constructor(
+    private reportService: ReportService,
+    private router: Router
+  ) {}
 
   onFileChange(event: any) {
     const file = event.target.files && event.target.files[0];
@@ -49,8 +55,19 @@ export class HomePage {
       remarks: this.remarks,
       fileName: this.selectedFileName
     };
+
+    this.reportService.addReport({
+      learner: this.selectedLearner,
+      reportType: this.selectedReportType,
+      score: this.score,
+      remarks: this.remarks,
+      fileName: this.selectedFileName
+    });
+
     this.isSubmitted = true;
+    this.router.navigate(['/view']);
   }
+
 
   resetForm() {
     this.selectedLearner = '';
@@ -62,5 +79,6 @@ export class HomePage {
     this.submittedData = null;
   }
 }
+
 
 
