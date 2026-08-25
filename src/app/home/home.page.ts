@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -8,6 +8,7 @@ import {
   IonTitle,
   IonContent
 } from '@ionic/angular';
+import { ReportService } from '../services/report.service';
 
 @Component({
   selector: 'app-home',
@@ -24,6 +25,9 @@ import {
   ]
 })
 export class HomePage {
+  private reportService = inject(ReportService);
+  private router = inject(Router);
+
   selectedLearner: string = '';
   selectedReportType: string = '';
   score: number | null = null;
@@ -46,11 +50,6 @@ export class HomePage {
   ];
 
   isSubmitted: boolean = false;
-  submittedData: any = null;
-
-  constructor(
-    private router: Router
-  ) {}
 
   onFileChange(event: any) {
     const file = event.target.files && event.target.files[0];
@@ -62,15 +61,28 @@ export class HomePage {
   }
 
   onSubmit() {
-    this.submittedData = {
+    if (!this.selectedLearner || !this.selectedReportType) {
+      return;
+    }
+
+    this.reportService.addReport({
       learner: this.selectedLearner,
       reportType: this.selectedReportType,
       score: this.score,
       remarks: this.remarks,
       fileName: this.selectedFileName
-    };
+    });
 
     this.isSubmitted = true;
+
+    // Reset form inputs
+    this.selectedLearner = '';
+    this.selectedReportType = '';
+    this.score = null;
+    this.remarks = '';
+    this.selectedFileName = '';
+
+    // Navigate to View page
     this.router.navigate(['/view']);
   }
 }

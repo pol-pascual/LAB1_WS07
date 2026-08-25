@@ -5,8 +5,6 @@ import { RouterLink } from '@angular/router';
 import {
   IonHeader,
   IonToolbar,
-  IonButtons,
-  IonBackButton,
   IonTitle,
   IonContent
 } from '@ionic/angular';
@@ -23,8 +21,6 @@ import { ReportCardComponent } from '../components/report-card/report-card.compo
     RouterLink,
     IonHeader,
     IonToolbar,
-    IonButtons,
-    IonBackButton,
     IonTitle,
     IonContent,
     ReportCardComponent

@@ -1,8 +1,5 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="light">
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/home"></ion-back-button>
-    </ion-buttons>
     <ion-title>Progress Reports</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -55,20 +52,6 @@
             <p class="empty-subtitle">No reports matched the selected child.</p>
           </div>
         } @else {
-          <!-- Scored Reports Summary Bar -->
-          @if (scoredReports.length > 0) {
-            <div class="performance-summary">
-              <div class="summary-stat">
-                <span class="stat-label">Average Score</span>
-                <span class="stat-value">{{ getAverageScore() }} / 100</span>
-              </div>
-              <div class="summary-stat">
-                <span class="stat-label">Total Scored Reports</span>
-                <span class="stat-value">{{ scoredReports.length }}</span>
-              </div>
-            </div>
-          }
-
           <!-- List of Reports using @for and Component Property & Event Binding -->
           <div class="reports-list">
             <h3 class="section-subtitle">Submitted Reports ({{ filteredReports.length }})</h3>
