@@ -1,11 +1,12 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { ProgressReport } from '../../services/report.service';
 
 @Component({
   selector: 'app-report-card',
   templateUrl: './report-card.component.html',
   styleUrls: ['./report-card.component.scss'],
-  standalone: false
+  imports: [CommonModule]
 })
 export class ReportCardComponent {
   @Input() report!: ProgressReport;

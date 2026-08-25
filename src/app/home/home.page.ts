@@ -1,18 +1,8 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import {
-  IonCard,
-  IonCardHeader,
-  IonCardTitle,
-  IonCardSubtitle,
-  IonCardContent,
-  IonItem,
-  IonSelect,
-  IonSelectOption,
-  IonInput,
-  IonTextarea,
-  IonLabel,
-  IonButton,
   IonHeader,
   IonToolbar,
   IonTitle,
@@ -23,7 +13,15 @@ import {
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  standalone: false,
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterLink,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonContent
+  ]
 })
 export class HomePage {
   selectedLearner: string = '';
@@ -75,18 +73,4 @@ export class HomePage {
     this.isSubmitted = true;
     this.router.navigate(['/view']);
   }
-
-
-  resetForm() {
-    this.selectedLearner = '';
-    this.selectedReportType = '';
-    this.score = null;
-    this.remarks = '';
-    this.selectedFileName = '';
-    this.isSubmitted = false;
-    this.submittedData = null;
-  }
 }
-
-
-

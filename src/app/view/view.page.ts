@@ -1,20 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ReportService, ProgressReport } from '../services/report.service';
+import { Component, OnInit, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import {
-  IonCard,
-  IonCardHeader,
-  IonCardTitle,
-  IonCardSubtitle,
-  IonCardContent,
-  IonItem,
-  IonSelect,
-  IonSelectOption,
-  IonGrid,
-  IonRow,
-  IonCol,
-  IonLabel,
-  IonList,
-  IonListHeader,
   IonHeader,
   IonToolbar,
   IonButtons,
@@ -22,14 +10,29 @@ import {
   IonTitle,
   IonContent
 } from '@ionic/angular';
+import { ReportService, ProgressReport } from '../services/report.service';
+import { ReportCardComponent } from '../components/report-card/report-card.component';
 
 @Component({
   selector: 'app-view',
   templateUrl: './view.page.html',
   styleUrls: ['./view.page.scss'],
-  standalone: false,
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterLink,
+    IonHeader,
+    IonToolbar,
+    IonButtons,
+    IonBackButton,
+    IonTitle,
+    IonContent,
+    ReportCardComponent
+  ]
 })
 export class ViewPage implements OnInit {
+  private reportService = inject(ReportService);
+
   selectedChild: string = '';
   allReports: ProgressReport[] = [];
   filteredReports: ProgressReport[] = [];
@@ -42,8 +45,6 @@ export class ViewPage implements OnInit {
     'Amy Santiago',
     'Rosa Diaz'
   ];
-
-  constructor(private reportService: ReportService) { }
 
   ngOnInit() {
     this.loadReports();
