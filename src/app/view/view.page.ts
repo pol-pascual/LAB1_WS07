@@ -1,6 +1,27 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { ReportService, ProgressReport } from '../services/report.service';
+import {
+  IonCard,
+  IonCardHeader,
+  IonCardTitle,
+  IonCardSubtitle,
+  IonCardContent,
+  IonItem,
+  IonSelect,
+  IonSelectOption,
+  IonGrid,
+  IonRow,
+  IonCol,
+  IonLabel,
+  IonList,
+  IonListHeader,
+  IonHeader,
+  IonToolbar,
+  IonButtons,
+  IonBackButton,
+  IonTitle,
+  IonContent
+} from '@ionic/angular';
 
 @Component({
   selector: 'app-view',
@@ -8,12 +29,11 @@ import { ReportService, ProgressReport } from '../services/report.service';
   styleUrls: ['./view.page.scss'],
   standalone: false,
 })
-export class ViewPage implements OnInit, OnDestroy {
+export class ViewPage implements OnInit {
   selectedChild: string = '';
   allReports: ProgressReport[] = [];
   filteredReports: ProgressReport[] = [];
   scoredReports: ProgressReport[] = [];
-  private reportSub!: Subscription;
 
   children: string[] = [
     'John Doe',
@@ -26,35 +46,50 @@ export class ViewPage implements OnInit, OnDestroy {
   constructor(private reportService: ReportService) { }
 
   ngOnInit() {
-    this.reportSub = this.reportService.reports$.subscribe(reports => {
-      this.allReports = reports;
-      this.filterReports();
-    });
+    this.loadReports();
   }
 
-  ngOnDestroy() {
-    if (this.reportSub) {
-      this.reportSub.unsubscribe();
+  ionViewWillEnter() {
+    this.loadReports();
+  }
+
+  loadReports() {
+    this.allReports = this.reportService.getReports();
+    this.filterReports();
+  }
+
+  onChildChange(event?: any) {
+    if (event && event.target && event.target.value !== undefined) {
+      this.selectedChild = event.target.value;
+    } else if (event && event.detail !== undefined && event.detail.value !== undefined) {
+      this.selectedChild = event.detail.value;
     }
-  }
-
-  onChildChange() {
     this.filterReports();
   }
 
   filterReports() {
-    if (!this.selectedChild) {
-      this.filteredReports = this.allReports;
-    } else {
-      this.filteredReports = this.allReports.filter(r => r.learner === this.selectedChild);
+    if (!this.allReports) {
+      this.filteredReports = [];
+      this.scoredReports = [];
+      return;
     }
 
-    this.scoredReports = this.filteredReports.filter(r => r.score !== null && r.score !== undefined);
+    if (!this.selectedChild) {
+      this.filteredReports = [...this.allReports];
+    } else {
+      this.filteredReports = this.allReports.filter(r => r && r.learner === this.selectedChild);
+    }
+
+    this.scoredReports = this.filteredReports.filter(r => r && r.score !== null && r.score !== undefined);
   }
 
   getAverageScore(): number {
-    if (this.scoredReports.length === 0) return 0;
-    const total = this.scoredReports.reduce((sum, r) => sum + Number(r.score), 0);
+    if (!this.scoredReports || this.scoredReports.length === 0) return 0;
+    const total = this.scoredReports.reduce((sum, r) => sum + Number(r.score || 0), 0);
     return Math.round((total / this.scoredReports.length) * 10) / 10;
+  }
+
+  onReportSelected(report: any) {
+    console.log('Selected report:', report);
   }
 }

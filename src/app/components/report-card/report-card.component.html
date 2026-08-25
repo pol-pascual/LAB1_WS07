@@ -1,0 +1,46 @@
+@if (report) {
+  <div class="report-item-card" (click)="onCardClick()">
+    <div class="report-item-header">
+      <span class="report-learner">{{ report.learner }}</span>
+      <span class="report-badge">
+        {{ report.reportType }}
+      </span>
+    </div>
+
+    @if (showDetails) {
+      <div class="report-item-body">
+        @if (report.score !== null && report.score !== undefined) {
+          <div class="report-field">
+            <span class="field-label">Score:</span>
+            <span class="field-value score-highlight">
+              {{ report.score }} / 100
+            </span>
+          </div>
+        } @else {
+          <div class="report-field">
+            <span class="field-label">Score:</span>
+            <span class="field-value unrated">Ungraded</span>
+          </div>
+        }
+
+        @if (report.remarks) {
+          <div class="report-field">
+            <span class="field-label">Remarks:</span>
+            <p class="field-value remarks-text">{{ report.remarks }}</p>
+          </div>
+        }
+
+        @if (report.fileName) {
+          <div class="report-field">
+            <span class="field-label">Attachment:</span>
+            <span class="field-value attachment-name">{{ report.fileName }}</span>
+          </div>
+        }
+
+        <div class="report-item-footer">
+          <span class="report-date">{{ report.createdAt | date:'medium' }}</span>
+        </div>
+      </div>
+    }
+  </div>
+}

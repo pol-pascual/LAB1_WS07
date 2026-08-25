@@ -14,15 +14,24 @@
         <p class="card-subtitle">Log learner progress and notify parents.</p>
       </div>
 
+      <!-- Form with Event Binding (ngSubmit) and Two-Way Form Binding (ngModel) -->
       <form (ngSubmit)="onSubmit()" #reportForm="ngForm" class="report-form">
         <div class="form-group">
           <label for="learner-select" class="form-label">Select Learner</label>
           <div class="select-wrapper">
-            <select class="form-control select-control" id="learner-select" name="learner" [(ngModel)] ="selectedLearner" required>
+            <select
+              class="form-control select-control"
+              id="learner-select"
+              name="learner"
+              [(ngModel)]="selectedLearner"
+              required
+            >
               <option value="" disabled selected hidden>Select a learner...</option>
-              <option *ngFor="let learner of learners" [value]="learner">
-                {{ learner }}
-              </option>
+              @for (learner of learners; track learner) {
+                <option [value]="learner">
+                  {{ learner }}
+                </option>
+              }
             </select>
           </div>
         </div>
@@ -30,41 +39,89 @@
         <div class="form-group">
           <label for="report-type-select" class="form-label">Report Type</label>
           <div class="select-wrapper">
-            <select class="form-control select-control" id="report-type-select" name="reportType" [(ngModel)]="selectedReportType" required>
+            <select
+              class="form-control select-control"
+              id="report-type-select"
+              name="reportType"
+              [(ngModel)]="selectedReportType"
+              required
+            >
               <option value="" disabled selected hidden>Select an option...</option>
-              <option *ngFor="let type of reportTypes" [value]="type">
-                {{ type }}
-              </option>
+              @for (type of reportTypes; track type) {
+                <option [value]="type">
+                  {{ type }}
+                </option>
+              }
             </select>
           </div>
         </div>
 
         <div class="form-group">
           <label for="score-input" class="form-label">Score (Optional)</label>
-          <input type="number" id="score-input" name="score" class="form-control" placeholder="0 - 100" min="0" max="100" [(ngModel)]="score"/>
+          <input
+            type="number"
+            id="score-input"
+            name="score"
+            class="form-control"
+            placeholder="0 - 100"
+            min="0"
+            max="100"
+            [(ngModel)]="score"
+          />
         </div>
 
         <div class="form-group">
           <label for="remarks-input" class="form-label">Remarks and Notes</label>
-          <textarea id="remarks-input" name="remarks" class="form-control textarea-control" rows="3" placeholder="Enter remarks or notes..." [(ngModel)]="remarks"></textarea>
+          <textarea
+            id="remarks-input"
+            name="remarks"
+            class="form-control textarea-control"
+            rows="3"
+            placeholder="Enter remarks or notes..."
+            [(ngModel)]="remarks"
+          ></textarea>
         </div>
 
         <div class="form-group">
           <label for="file-input" class="form-label">Attach Image or Video</label>
-          <input type="file" id="file-input" name="attachment" class="form-control file-input" accept="image/*,video/*" (change)="onFileChange($event)"/>
+          <input
+            type="file"
+            id="file-input"
+            name="attachment"
+            class="form-control file-input"
+            accept="image/*,video/*"
+            (change)="onFileChange($event)"
+          />
         </div>
+
+        <!-- Conditional Summary Preview using @if and Interpolation -->
+        @if (selectedLearner || selectedReportType) {
+          <div class="preview-box" style="margin-bottom: 16px; padding: 12px; background-color: #f1f5f9; border-radius: 8px;">
+            <p style="margin: 0; font-size: 13px; color: #475569;">
+              <strong>Selection Preview:</strong> {{ selectedLearner || 'None' }} — {{ selectedReportType || 'None' }}
+            </p>
+          </div>
+        }
 
         <div class="form-actions">
-          <button type="submit" class="submit-btn">
+          <!-- Property Binding: [disabled] -->
+          <button
+            type="submit"
+            class="submit-btn"
+            [disabled]="!selectedLearner || !selectedReportType"
+          >
             Submit Report
           </button>
-          <button type="button" class="nav-btn" routerLink="/view">
+
+          <button
+            type="button"
+            class="nav-btn"
+            routerLink="/view"
+          >
             View Progress Reports
           </button>
-
         </div>
       </form>
-
     </div>
   </div>
 </ion-content>

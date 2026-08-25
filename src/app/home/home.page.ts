@@ -1,6 +1,23 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ReportService } from '../services/report.service';
+import {
+  IonCard,
+  IonCardHeader,
+  IonCardTitle,
+  IonCardSubtitle,
+  IonCardContent,
+  IonItem,
+  IonSelect,
+  IonSelectOption,
+  IonInput,
+  IonTextarea,
+  IonLabel,
+  IonButton,
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent
+} from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -34,7 +51,6 @@ export class HomePage {
   submittedData: any = null;
 
   constructor(
-    private reportService: ReportService,
     private router: Router
   ) {}
 
@@ -55,14 +71,6 @@ export class HomePage {
       remarks: this.remarks,
       fileName: this.selectedFileName
     };
-
-    this.reportService.addReport({
-      learner: this.selectedLearner,
-      reportType: this.selectedReportType,
-      score: this.score,
-      remarks: this.remarks,
-      fileName: this.selectedFileName
-    });
 
     this.isSubmitted = true;
     this.router.navigate(['/view']);

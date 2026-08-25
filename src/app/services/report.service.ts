@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
 
 export interface ProgressReport {
-  id: string;
+  id: number | string;
   learner: string;
   reportType: string;
   score?: number | null;
@@ -15,24 +14,40 @@ export interface ProgressReport {
   providedIn: 'root'
 })
 export class ReportService {
-  private reportsSubject = new BehaviorSubject<ProgressReport[]>([]);
-  public reports$: Observable<ProgressReport[]> = this.reportsSubject.asObservable();
+  private reports: ProgressReport[] = [
+    {
+      id: 1,
+      learner: 'John Doe',
+      reportType: 'Seatwork',
+      score: 85,
+      remarks: 'Good progress on algebra exercises.',
+      fileName: '',
+      createdAt: new Date()
+    },
+    {
+      id: 2,
+      learner: 'Jake Peralta',
+      reportType: 'Daily Progress Report',
+      score: 92,
+      remarks: 'Excellent focus today.',
+      fileName: '',
+      createdAt: new Date()
+    },
+    {
+      id: 3,
+      learner: 'Amy Santiago',
+      reportType: 'Annual Performance Review',
+      score: 98,
+      remarks: 'Outstanding participation and results.',
+      fileName: '',
+      createdAt: new Date()
+    }
+  ];
 
   constructor() {}
 
-  getReports(): ProgressReport[] {
-    return this.reportsSubject.getValue();
-  }
-
-  addReport(report: Omit<ProgressReport, 'id' | 'createdAt'>): ProgressReport {
-    const newReport: ProgressReport = {
-      ...report,
-      id: Math.random().toString(36).substring(2, 9),
-      createdAt: new Date()
-    };
-    const currentReports = this.getReports();
-    const updatedReports = [newReport, ...currentReports];
-    this.reportsSubject.next(updatedReports);
-    return newReport;
+  getReports() {
+    return this.reports;
   }
 }
+
