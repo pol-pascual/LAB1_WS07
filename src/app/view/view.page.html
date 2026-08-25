@@ -6,18 +6,18 @@
 
 <ion-content [fullscreen]="true" class="ion-padding page-bg">
   <ion-card class="page-wrapper">
-    <!-- Stacked Navigation Tabs -->
-    <div class="navigation-button-group">
-      <button type="button" class="nav-tab-btn" routerLink="/view" routerLinkActive="active">
+    <!-- Stacked Navigation Tabs using ion-buttons -->
+    <ion-buttons class="navigation-button-group">
+      <ion-button routerLink="/view" routerLinkActive="active" class="nav-tab-btn">
         View Progress Reports
-      </button>
-      <button type="button" class="nav-tab-btn" routerLink="/home" routerLinkActive="active">
+      </ion-button>
+      <ion-button routerLink="/home" routerLinkActive="active" class="nav-tab-btn">
         Create Progress Report
-      </button>
-    </div>
+      </ion-button>
+    </ion-buttons>
 
     <ion-card-header class="card-header">
-      <ion-card-title class="card-title">Performance Charts</ion-card-title>
+      <ion-card-title class="card-title">View Progress Reports</ion-card-title>
       <ion-card-subtitle class="card-subtitle">Select a child to view their progress over time.</ion-card-subtitle>
     </ion-card-header>
 
@@ -56,7 +56,7 @@
             <h3 class="section-subtitle">Submitted Reports ({{ filteredReports.length }})</h3>
 
             @for (report of filteredReports; track report.id) {
-              <app-report-card [report]="report" [showDetails]="true" (cardClick)="onReportSelected($event)"></app-report-card>
+              <app-report-card [report]="report" [showDetails]="true" [showFeedback]="false" (cardClick)="onReportSelected($event)"></app-report-card>
             }
           </div>
         }

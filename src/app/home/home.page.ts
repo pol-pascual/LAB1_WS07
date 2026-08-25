@@ -19,7 +19,8 @@ import {
   IonSelectOption,
   IonInput,
   IonTextarea,
-  IonButton
+  IonButton,
+  IonButtons
 } from '@ionic/angular';
 import { ReportService } from '../services/report.service';
 
@@ -48,7 +49,8 @@ import { ReportService } from '../services/report.service';
     IonSelectOption,
     IonInput,
     IonTextarea,
-    IonButton
+    IonButton,
+    IonButtons
   ]
 })
 export class HomePage {

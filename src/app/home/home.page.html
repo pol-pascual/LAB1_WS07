@@ -8,15 +8,15 @@
 
 <ion-content [fullscreen]="true" class="ion-padding page-bg">
   <ion-card class="form-wrapper">
-    <!-- Stacked Navigation Tabs -->
-    <div class="navigation-button-group">
-      <button type="button" class="nav-tab-btn" routerLink="/view" routerLinkActive="active">
+    <!-- Stacked Navigation Tabs using ion-buttons -->
+    <ion-buttons class="navigation-button-group">
+      <ion-button routerLink="/view" routerLinkActive="active" class="nav-tab-btn">
         View Progress Reports
-      </button>
-      <button type="button" class="nav-tab-btn" routerLink="/home" routerLinkActive="active">
+      </ion-button>
+      <ion-button routerLink="/home" routerLinkActive="active" class="nav-tab-btn">
         Create Progress Report
-      </button>
-    </div>
+      </ion-button>
+    </ion-buttons>
 
     <ion-card-header class="card-header">
       <ion-card-title class="card-title">Create Progress Report</ion-card-title>

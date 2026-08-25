@@ -17,7 +17,9 @@ import {
   IonLabel,
   IonSelect,
   IonSelectOption,
-  IonText
+  IonText,
+  IonButton,
+  IonButtons
 } from '@ionic/angular';
 import { ReportService, ProgressReport } from '../services/report.service';
 import { ReportCardComponent } from '../components/report-card/report-card.component';
@@ -46,6 +48,8 @@ import { ReportCardComponent } from '../components/report-card/report-card.compo
     IonSelect,
     IonSelectOption,
     IonText,
+    IonButton,
+    IonButtons,
     ReportCardComponent
   ]
 })
@@ -120,6 +124,8 @@ export class ViewPage implements OnInit {
   }
 
   onReportSelected(report: any) {
-    console.log('Selected report:', report);
+    if (report && report.id) {
+      this.router.navigate(['/report-detail', report.id]);
+    }
   }
 }

@@ -39,14 +39,19 @@
 
         <div class="report-item-footer">
           <span class="report-date">{{ report.createdAt | date:'medium' }}</span>
+          @if (!showFeedback) {
+            <span class="details-link">Tap for Details & Feedback &rarr;</span>
+          }
         </div>
 
         <!-- Feedback Component -->
-        <app-feedback
-          [reportId]="report.id"
-          [feedbacks]="report.feedbacks || []"
-          (click)="$event.stopPropagation()"
-        ></app-feedback>
+        @if (showFeedback) {
+          <app-feedback
+            [reportId]="report.id"
+            [feedbacks]="report.feedbacks || []"
+            (click)="$event.stopPropagation()"
+          ></app-feedback>
+        }
       </ion-card-content>
     }
   </ion-card>

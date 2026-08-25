@@ -23,6 +23,10 @@ export class ReportService {
     return this.reports;
   }
 
+  getReportById(id: number | string): ProgressReport | undefined {
+    return this.reports.find(r => String(r.id) === String(id));
+  }
+
   addReport(reportData: Partial<ProgressReport>) {
     const newReport: ProgressReport = {
       id: Date.now(),

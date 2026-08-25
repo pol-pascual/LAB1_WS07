@@ -22,22 +22,29 @@
 
 .card-header {
   margin-bottom: 24px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
 }
 
 .card-title {
-  font-size: 20px;
+  font-size: 30px;
   font-weight: 700;
   color: #0f172a;
   margin: 0 0 6px 0;
   letter-spacing: -0.3px;
+  order: 1;
 }
 
 .card-subtitle {
   font-size: 13px;
+  font-weight: 400;
   color: #64748b;
   margin: 0;
   line-height: 1.4;
   white-space: normal;
+  text-transform: none;
+  order: 2;
 }
 
 ion-select, ion-input, ion-textarea {

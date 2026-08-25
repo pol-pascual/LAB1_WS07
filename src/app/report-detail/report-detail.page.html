@@ -1,0 +1,96 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/view" text="Back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Report Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding page-bg">
+  <div class="detail-wrapper">
+    <!-- Back navigation bar -->
+    <div class="back-bar">
+      <ion-button fill="clear" size="small" class="back-btn" (click)="goBack()">
+        &larr; Back to Progress Reports
+      </ion-button>
+    </div>
+
+    @if (report) {
+      <ion-card class="report-detail-card">
+        <ion-card-header class="card-header">
+          <span class="report-badge">{{ report.reportType }}</span>
+          <ion-card-title class="card-title">{{ report.learner }}</ion-card-title>
+          <ion-card-subtitle class="card-subtitle">
+            Progress report details and feedback
+          </ion-card-subtitle>
+        </ion-card-header>
+
+        <ion-card-content class="card-body">
+          <div class="detail-section">
+            <h4 class="section-title">Report Summary</h4>
+
+            <div class="detail-grid">
+              <div class="detail-item">
+                <span class="detail-label">Learner Name</span>
+                <span class="detail-value highlight">{{ report.learner }}</span>
+              </div>
+
+              <div class="detail-item">
+                <span class="detail-label">Report Type</span>
+                <span class="detail-value">{{ report.reportType }}</span>
+              </div>
+
+              <div class="detail-item">
+                <span class="detail-label">Score</span>
+                @if (report.score !== null && report.score !== undefined) {
+                  <span class="detail-value score-badge">{{ report.score }} / 100</span>
+                } @else {
+                  <span class="detail-value unrated">Ungraded</span>
+                }
+              </div>
+
+              <div class="detail-item">
+                <span class="detail-label">Submitted On</span>
+                <span class="detail-value">{{ report.createdAt | date:'medium' }}</span>
+              </div>
+
+              @if (report.remarks) {
+                <div class="detail-item full-width">
+                  <span class="detail-label">Remarks & Notes</span>
+                  <p class="detail-text">{{ report.remarks }}</p>
+                </div>
+              }
+
+              @if (report.fileName) {
+                <div class="detail-item full-width">
+                  <span class="detail-label">Attachment</span>
+                  <span class="detail-value attachment-name">&udarr; {{ report.fileName }}</span>
+                </div>
+              }
+            </div>
+          </div>
+
+          <!-- Feedback Section -->
+          <div class="feedback-wrapper">
+            <app-feedback
+              [reportId]="report.id"
+              [feedbacks]="report.feedbacks || []"
+              (feedbackAdded)="loadReport()"
+            ></app-feedback>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    } @else {
+      <ion-card class="report-detail-card empty-card">
+        <ion-card-content class="ion-text-center">
+          <h3 class="empty-title">Report Not Found</h3>
+          <p class="empty-subtitle">The requested progress report could not be found.</p>
+          <ion-button expand="block" color="primary" class="return-btn" (click)="goBack()">
+            Return to Reports
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+    }
+  </div>
+</ion-content>

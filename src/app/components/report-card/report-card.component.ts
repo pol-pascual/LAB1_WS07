@@ -18,6 +18,7 @@ import { FeedbackComponent } from '../feedback/feedback.component';
 export class ReportCardComponent {
   @Input() report!: ProgressReport;
   @Input() showDetails: boolean = true;
+  @Input() showFeedback: boolean = false;
   @Output() cardClick = new EventEmitter<ProgressReport>();
 
   onCardClick() {
