@@ -8,6 +8,16 @@
 
 <ion-content [fullscreen]="true" class="ion-padding page-bg">
   <div class="form-wrapper">
+    <!-- Stacked navigation buttons above card -->
+    <div class="navigation-button-group">
+      <button type="button" class="nav-tab-btn" routerLink="/view">
+        View Progress Reports
+      </button>
+      <button type="button" class="nav-tab-btn active" routerLink="/home">
+        Create Progress Report
+      </button>
+    </div>
+
     <div class="report-card">
       <div class="card-header">
         <h1 class="card-title">Create Progress Report</h1>
@@ -111,14 +121,6 @@
             [disabled]="!selectedLearner || !selectedReportType"
           >
             Submit Report
-          </button>
-
-          <button
-            type="button"
-            class="nav-btn"
-            routerLink="/view"
-          >
-            View Progress Reports
           </button>
         </div>
       </form>

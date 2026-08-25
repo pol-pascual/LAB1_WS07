@@ -6,21 +6,20 @@
 
 <ion-content [fullscreen]="true" class="ion-padding page-bg">
   <div class="page-wrapper">
+    <!-- Stacked navigation buttons above card -->
+    <div class="navigation-button-group">
+      <button type="button" class="nav-tab-btn active" routerLink="/view">
+        View Progress Reports
+      </button>
+      <button type="button" class="nav-tab-btn" routerLink="/home">
+        Create Progress Report
+      </button>
+    </div>
+
     <div class="charts-card">
       <div class="card-header">
         <h1 class="card-title">Performance Charts</h1>
         <p class="card-subtitle">Select a child to view their progress over time.</p>
-
-        <!-- Create Report Button below Subtitle -->
-        <div style="margin-top: 14px;">
-          <button
-            type="button"
-            routerLink="/home"
-            style="width: 100%; padding: 12px; background: #2563eb; color: #ffffff; border: none; border-radius: 10px; font-weight: 600; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px;"
-          >
-            + Create Progress Report
-          </button>
-        </div>
       </div>
 
       <!-- Select Child Dropdown with Two-Way Form Binding (ngModel) + Event Binding (change) -->
