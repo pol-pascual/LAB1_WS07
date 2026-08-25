@@ -1,0 +1,34 @@
+<div class="feedback-container">
+  <h4 class="feedback-title">Feedback & Comments</h4>
+
+  <!-- List of existing feedbacks -->
+  @if (feedbacks && feedbacks.length > 0) {
+    <div class="feedback-list">
+      @for (fb of feedbacks; track $index) {
+        <div class="feedback-item">
+          <p class="feedback-text">{{ fb }}</p>
+        </div>
+      }
+    </div>
+  } @else {
+    <p class="no-feedback-text">No feedback submitted yet.</p>
+  }
+
+  <!-- Feedback form with textarea and submit button -->
+  <div class="feedback-form">
+    <textarea
+      class="feedback-textarea"
+      rows="2"
+      placeholder="Type your feedback here..."
+      [(ngModel)]="newFeedbackText"
+    ></textarea>
+    <button
+      type="button"
+      class="feedback-submit-btn"
+      [disabled]="!newFeedbackText.trim()"
+      (click)="onSubmitFeedback()"
+    >
+      Submit Feedback
+    </button>
+  </div>
+</div>

@@ -1,12 +1,23 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import {
   IonHeader,
   IonToolbar,
   IonTitle,
-  IonContent
+  IonContent,
+  IonCard,
+  IonCardHeader,
+  IonCardTitle,
+  IonCardSubtitle,
+  IonCardContent,
+  IonList,
+  IonItem,
+  IonLabel,
+  IonSelect,
+  IonSelectOption,
+  IonText
 } from '@ionic/angular';
 import { ReportService, ProgressReport } from '../services/report.service';
 import { ReportCardComponent } from '../components/report-card/report-card.component';
@@ -19,22 +30,36 @@ import { ReportCardComponent } from '../components/report-card/report-card.compo
     CommonModule,
     FormsModule,
     RouterLink,
+    RouterLinkActive,
     IonHeader,
     IonToolbar,
     IonTitle,
     IonContent,
+    IonCard,
+    IonCardHeader,
+    IonCardTitle,
+    IonCardSubtitle,
+    IonCardContent,
+    IonList,
+    IonItem,
+    IonLabel,
+    IonSelect,
+    IonSelectOption,
+    IonText,
     ReportCardComponent
   ]
 })
 export class ViewPage implements OnInit {
   private reportService = inject(ReportService);
+  private router = inject(Router);
 
-  selectedChild: string = '';
-  allReports: ProgressReport[] = [];
-  filteredReports: ProgressReport[] = [];
-  scoredReports: ProgressReport[] = [];
+  public segmentValue: string = 'view';
+  public selectedChild: string = '';
+  public allReports: ProgressReport[] = [];
+  public filteredReports: ProgressReport[] = [];
+  public scoredReports: ProgressReport[] = [];
 
-  children: string[] = [
+  public children: string[] = [
     'John Doe',
     'Jake Peralta',
     'Charles Boyle',
@@ -47,7 +72,15 @@ export class ViewPage implements OnInit {
   }
 
   ionViewWillEnter() {
+    this.segmentValue = 'view';
     this.loadReports();
+  }
+
+  onSegmentChange(event: any) {
+    const val = event.detail.value;
+    if (val && val !== 'view') {
+      this.router.navigate(['/' + val]);
+    }
   }
 
   loadReports() {

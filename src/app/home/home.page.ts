@@ -1,12 +1,25 @@
 import { Component, inject } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
   IonHeader,
   IonToolbar,
   IonTitle,
-  IonContent
+  IonContent,
+  IonCard,
+  IonCardHeader,
+  IonCardTitle,
+  IonCardSubtitle,
+  IonCardContent,
+  IonList,
+  IonItem,
+  IonLabel,
+  IonSelect,
+  IonSelectOption,
+  IonInput,
+  IonTextarea,
+  IonButton
 } from '@ionic/angular';
 import { ReportService } from '../services/report.service';
 
@@ -18,23 +31,49 @@ import { ReportService } from '../services/report.service';
     CommonModule,
     FormsModule,
     RouterLink,
+    RouterLinkActive,
     IonHeader,
     IonToolbar,
     IonTitle,
-    IonContent
+    IonContent,
+    IonCard,
+    IonCardHeader,
+    IonCardTitle,
+    IonCardSubtitle,
+    IonCardContent,
+    IonList,
+    IonItem,
+    IonLabel,
+    IonSelect,
+    IonSelectOption,
+    IonInput,
+    IonTextarea,
+    IonButton
   ]
 })
 export class HomePage {
   private reportService = inject(ReportService);
   private router = inject(Router);
 
-  selectedLearner: string = '';
-  selectedReportType: string = '';
-  score: number | null = null;
-  remarks: string = '';
-  selectedFileName: string = '';
+  public segmentValue: string = 'home';
+  public selectedLearner: string = '';
+  public selectedReportType: string = '';
+  public score: number | null = null;
+  public remarks: string = '';
+  public selectedFileName: string = '';
 
-  learners: string[] = [
+  ionViewWillEnter() {
+    this.segmentValue = 'home';
+  }
+
+  onSegmentChange(event: any) {
+    const val = event.detail.value;
+    if (val && val !== 'home') {
+      this.router.navigate(['/' + val]);
+    }
+  }
+
+  public learners: string[] = [
     'John Doe',
     'Jake Peralta',
     'Charles Boyle',
@@ -42,16 +81,16 @@ export class HomePage {
     'Rosa Diaz'
   ];
 
-  reportTypes: string[] = [
+  public reportTypes: string[] = [
     'Seatwork',
     'Take Home Assignment',
     'Daily Progress Report',
     'Annual Performance Review'
   ];
 
-  isSubmitted: boolean = false;
+  public isSubmitted: boolean = false;
 
-  onFileChange(event: any) {
+  public onFileChange(event: any) {
     const file = event.target.files && event.target.files[0];
     if (file) {
       this.selectedFileName = file.name;

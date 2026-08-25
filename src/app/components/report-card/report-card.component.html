@@ -1,14 +1,14 @@
 @if (report) {
-  <div class="report-item-card" (click)="onCardClick()">
+  <ion-card class="report-item-card" (click)="onCardClick()">
     <div class="report-item-header">
-      <span class="report-learner">{{ report.learner }}</span>
       <span class="report-badge">
         {{ report.reportType }}
       </span>
+      <h3 class="report-learner">{{ report.learner }}</h3>
     </div>
 
     @if (showDetails) {
-      <div class="report-item-body">
+      <ion-card-content class="report-item-body">
         @if (report.score !== null && report.score !== undefined) {
           <div class="report-field">
             <span class="field-label">Score:</span>
@@ -40,7 +40,14 @@
         <div class="report-item-footer">
           <span class="report-date">{{ report.createdAt | date:'medium' }}</span>
         </div>
-      </div>
+
+        <!-- Feedback Component -->
+        <app-feedback
+          [reportId]="report.id"
+          [feedbacks]="report.feedbacks || []"
+          (click)="$event.stopPropagation()"
+        ></app-feedback>
+      </ion-card-content>
     }
-  </div>
+  </ion-card>
 }

@@ -5,66 +5,62 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding page-bg">
-  <div class="page-wrapper">
-    <!-- Stacked navigation buttons above card -->
+  <ion-card class="page-wrapper">
+    <!-- Stacked Navigation Tabs -->
     <div class="navigation-button-group">
-      <button type="button" class="nav-tab-btn active" routerLink="/view">
+      <button type="button" class="nav-tab-btn" routerLink="/view" routerLinkActive="active">
         View Progress Reports
       </button>
-      <button type="button" class="nav-tab-btn" routerLink="/home">
+      <button type="button" class="nav-tab-btn" routerLink="/home" routerLinkActive="active">
         Create Progress Report
       </button>
     </div>
 
-    <div class="charts-card">
-      <div class="card-header">
-        <h1 class="card-title">Performance Charts</h1>
-        <p class="card-subtitle">Select a child to view their progress over time.</p>
-      </div>
+    <ion-card-header class="card-header">
+      <ion-card-title class="card-title">Performance Charts</ion-card-title>
+      <ion-card-subtitle class="card-subtitle">Select a child to view their progress over time.</ion-card-subtitle>
+    </ion-card-header>
 
-      <!-- Select Child Dropdown with Two-Way Form Binding (ngModel) + Event Binding (change) -->
-      <div class="form-group margin-bottom">
-        <div class="select-wrapper">
-          <select
-            class="form-control select-control"
-            [(ngModel)]="selectedChild"
-            (change)="onChildChange($event)"
-          >
-            <option value="">All Children</option>
+    <ion-card-content>
+      <!-- Ionic Select Child Dropdown with Two-Way Binding [(ngModel)] + Event Binding (change) -->
+      <ion-list lines="none" class="margin-bottom">
+        <ion-item class="form-group">
+          <ion-select label="Select Child" labelPlacement="stacked" [(ngModel)]="selectedChild" (ionChange)="onChildChange($event)">
+            <ion-select-option value="">All Children</ion-select-option>
             @for (child of children; track child) {
-              <option [value]="child">
+              <ion-select-option [value]="child">
                 {{ child }}
-              </option>
+              </ion-select-option>
             }
-          </select>
-        </div>
-      </div>
+          </ion-select>
+        </ion-item>
+      </ion-list>
 
       <!-- Academic Performance Container -->
       <div class="academic-container">
-        <h2 class="academic-title">Academic Performance</h2>
+        <ion-text color="dark">
+          <h2 class="academic-title">Academic Performance</h2>
+        </ion-text>
 
         <!-- Conditional Content using @if and @else -->
         @if (filteredReports.length === 0) {
-          <div class="empty-state">
-            <h3 class="empty-title">No reports available</h3>
-            <p class="empty-subtitle">No reports matched the selected child.</p>
-          </div>
+          <ion-item lines="none" class="empty-state">
+            <ion-label class="ion-text-center">
+              <h3 class="empty-title">No reports available</h3>
+              <p class="empty-subtitle">No reports matched the selected child.</p>
+            </ion-label>
+          </ion-item>
         } @else {
           <!-- List of Reports using @for and Component Property & Event Binding -->
           <div class="reports-list">
             <h3 class="section-subtitle">Submitted Reports ({{ filteredReports.length }})</h3>
 
             @for (report of filteredReports; track report.id) {
-              <app-report-card
-                [report]="report"
-                [showDetails]="true"
-                (cardClick)="onReportSelected($event)"
-              ></app-report-card>
+              <app-report-card [report]="report" [showDetails]="true" (cardClick)="onReportSelected($event)"></app-report-card>
             }
           </div>
         }
       </div>
-    </div>
-  </div>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

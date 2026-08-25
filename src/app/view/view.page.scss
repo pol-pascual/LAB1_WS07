@@ -25,7 +25,7 @@
 }
 
 .card-title {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 800;
   color: #0f172a;
   margin: 0 0 6px 0;
@@ -33,10 +33,15 @@
 }
 
 .card-subtitle {
-  font-size: 14px;
+  font-size: 13px;
   color: #64748b;
   margin: 0;
   line-height: 1.4;
+  white-space: normal;
+}
+
+ion-select {
+  font-size: 13.5px;
 }
 
 .margin-bottom {

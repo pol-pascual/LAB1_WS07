@@ -1,41 +1,54 @@
+:host {
+  display: block;
+}
+
 .report-item-card {
   background: #ffffff;
   border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 16px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
-  transition: box-shadow 0.2s;
-  margin-top: 12px;
+  border-radius: 14px;
+  margin: 12px 0 0 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  transition: transform 0.15s, box-shadow 0.15s;
+  cursor: pointer;
 
   &:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
   }
 }
 
 .report-item-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 12px;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 6px !important;
+  padding: 16px 16px 6px 16px !important;
+  width: 100%;
+  box-sizing: border-box;
+}
 
-  .report-learner {
-    font-size: 16px;
-    font-weight: 700;
-    color: #0f172a;
-  }
+.report-badge {
+  background-color: #eff6ff !important;
+  color: #2563eb !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  padding: 3px 10px !important;
+  border-radius: 20px !important;
+  border: 1px solid #bfdbfe !important;
+  display: inline-block !important;
+  white-space: nowrap !important;
+}
 
-  .report-badge {
-    background-color: #eff6ff;
-    color: #2563eb;
-    font-size: 12px;
-    font-weight: 600;
-    padding: 4px 10px;
-    border-radius: 20px;
-    border: 1px solid #bfdbfe;
-  }
+.report-learner {
+  font-size: 17px !important;
+  font-weight: 700 !important;
+  color: #0f172a !important;
+  margin: 2px 0 0 0 !important;
+  text-align: left !important;
+  word-break: break-word;
 }
 
 .report-item-body {
+  padding: 8px 16px 16px 16px !important;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -44,13 +57,13 @@
 .report-field {
   display: flex;
   align-items: baseline;
-  gap: 8px;
+  gap: 6px;
   font-size: 14px;
+  text-align: left;
 
   .field-label {
     font-weight: 600;
     color: #475569;
-    min-width: 80px;
   }
 
   .field-value {
@@ -62,9 +75,15 @@
     color: #16a34a;
   }
 
+  .unrated {
+    color: #94a3b8;
+    font-style: italic;
+  }
+
   .remarks-text {
-    margin: 0;
+    margin: 2px 0 0 0;
     color: #334155;
+    font-size: 13.5px;
     white-space: pre-wrap;
   }
 
@@ -75,7 +94,7 @@
 }
 
 .report-item-footer {
-  margin-top: 6px;
+  margin-top: 8px;
   padding-top: 8px;
   border-top: 1px dashed #f1f5f9;
   display: flex;

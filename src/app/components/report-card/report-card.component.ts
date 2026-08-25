@@ -1,12 +1,19 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { IonCard, IonCardContent } from '@ionic/angular';
 import { ProgressReport } from '../../services/report.service';
+import { FeedbackComponent } from '../feedback/feedback.component';
 
 @Component({
   selector: 'app-report-card',
   templateUrl: './report-card.component.html',
   styleUrls: ['./report-card.component.scss'],
-  imports: [CommonModule]
+  imports: [
+    CommonModule,
+    IonCard,
+    IonCardContent,
+    FeedbackComponent
+  ]
 })
 export class ReportCardComponent {
   @Input() report!: ProgressReport;
