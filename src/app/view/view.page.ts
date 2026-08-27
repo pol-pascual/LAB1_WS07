@@ -1,12 +1,23 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import {
   IonHeader,
   IonToolbar,
   IonTitle,
-  IonContent
+  IonContent,
+  IonCard,
+  IonCardHeader,
+  IonCardTitle,
+  IonCardSubtitle,
+  IonCardContent,
+  IonList,
+  IonItem,
+  IonLabel,
+  IonSelect,
+  IonSelectOption,
+  IonText
 } from '@ionic/angular';
 import { ReportService, ProgressReport } from '../services/report.service';
 import { ReportCardComponent } from '../components/report-card/report-card.component';
@@ -19,10 +30,22 @@ import { ReportCardComponent } from '../components/report-card/report-card.compo
     CommonModule,
     FormsModule,
     RouterLink,
+    RouterLinkActive,
     IonHeader,
     IonToolbar,
     IonTitle,
     IonContent,
+    IonCard,
+    IonCardHeader,
+    IonCardTitle,
+    IonCardSubtitle,
+    IonCardContent,
+    IonList,
+    IonItem,
+    IonLabel,
+    IonSelect,
+    IonSelectOption,
+    IonText,
     ReportCardComponent
   ]
 })

@@ -7,123 +7,74 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding page-bg">
-  <div class="form-wrapper">
-    <!-- Stacked navigation buttons above card -->
+  <ion-card class="form-wrapper">
     <div class="navigation-button-group">
-      <button type="button" class="nav-tab-btn" routerLink="/view">
+      <button type="button" class="nav-tab-btn" routerLink="/view" routerLinkActive="active">
         View Progress Reports
       </button>
-      <button type="button" class="nav-tab-btn active" routerLink="/home">
+      <button type="button" class="nav-tab-btn" routerLink="/home" routerLinkActive="active">
         Create Progress Report
       </button>
     </div>
 
-    <div class="report-card">
-      <div class="card-header">
-        <h1 class="card-title">Create Progress Report</h1>
-        <p class="card-subtitle">Log learner progress and notify parents.</p>
-      </div>
+    <ion-card-header class="card-header">
+      <ion-card-title class="card-title">Create Progress Report</ion-card-title>
+      <ion-card-subtitle class="card-subtitle">Log learner progress and notify parents.</ion-card-subtitle>
+    </ion-card-header>
 
-      <!-- Form with Event Binding (ngSubmit) and Two-Way Form Binding (ngModel) -->
+    <ion-card-content>
       <form (ngSubmit)="onSubmit()" #reportForm="ngForm" class="report-form">
-        <div class="form-group">
-          <label for="learner-select" class="form-label">Select Learner</label>
-          <div class="select-wrapper">
-            <select
-              class="form-control select-control"
-              id="learner-select"
-              name="learner"
-              [(ngModel)]="selectedLearner"
-              required
-            >
-              <option value="" disabled selected hidden>Select a learner...</option>
+        <ion-list lines="none">
+          <ion-item class="form-group">
+            <ion-select label="Select Learner" labelPlacement="stacked" name="learner" [(ngModel)]="selectedLearner" required>
+              <ion-select-option value="" disabled selected hidden>Select a learner...</ion-select-option>
               @for (learner of learners; track learner) {
-                <option [value]="learner">
+                <ion-select-option [value]="learner">
                   {{ learner }}
-                </option>
+                </ion-select-option>
               }
-            </select>
-          </div>
-        </div>
+            </ion-select>
+          </ion-item>
 
-        <div class="form-group">
-          <label for="report-type-select" class="form-label">Report Type</label>
-          <div class="select-wrapper">
-            <select
-              class="form-control select-control"
-              id="report-type-select"
-              name="reportType"
-              [(ngModel)]="selectedReportType"
-              required
-            >
-              <option value="" disabled selected hidden>Select an option...</option>
+          <ion-item class="form-group">
+            <ion-select label="Report Type" labelPlacement="stacked" name="reportType" [(ngModel)]="selectedReportType" required>
+              <ion-select-option value="" disabled selected hidden>Select an option...</ion-select-option>
               @for (type of reportTypes; track type) {
-                <option [value]="type">
+                <ion-select-option [value]="type">
                   {{ type }}
-                </option>
+                </ion-select-option>
               }
-            </select>
-          </div>
-        </div>
+            </ion-select>
+          </ion-item>
 
-        <div class="form-group">
-          <label for="score-input" class="form-label">Score (Optional)</label>
-          <input
-            type="number"
-            id="score-input"
-            name="score"
-            class="form-control"
-            placeholder="0 - 100"
-            min="0"
-            max="100"
-            [(ngModel)]="score"
-          />
-        </div>
+          <ion-item class="form-group">
+            <ion-input label="Score (Optional)" labelPlacement="stacked" type="number" name="score" placeholder="0 - 100" min="0" max="100" [(ngModel)]="score"></ion-input>
+          </ion-item>
 
-        <div class="form-group">
-          <label for="remarks-input" class="form-label">Remarks and Notes</label>
-          <textarea
-            id="remarks-input"
-            name="remarks"
-            class="form-control textarea-control"
-            rows="3"
-            placeholder="Enter remarks or notes..."
-            [(ngModel)]="remarks"
-          ></textarea>
-        </div>
+          <ion-item class="form-group">
+            <ion-textarea label="Remarks and Notes" labelPlacement="stacked" name="remarks" rows="3" placeholder="Enter remarks or notes..." [(ngModel)]="remarks"></ion-textarea>
+          </ion-item>
 
-        <div class="form-group">
-          <label for="file-input" class="form-label">Attach Image or Video</label>
-          <input
-            type="file"
-            id="file-input"
-            name="attachment"
-            class="form-control file-input"
-            accept="image/*,video/*"
-            (change)="onFileChange($event)"
-          />
-        </div>
+          <ion-item class="form-group">
+            <ion-label position="stacked" style="margin-bottom: 8px;">Attach Image or Video</ion-label>
+            <input type="file" id="file-input" name="attachment" class="form-control file-input" accept="image/*,video/*" (change)="onFileChange($event)"/>
+          </ion-item>
 
-        <!-- Conditional Summary Preview using @if and Interpolation -->
-        @if (selectedLearner || selectedReportType) {
-          <div class="preview-box" style="margin-bottom: 16px; padding: 12px; background-color: #f1f5f9; border-radius: 8px;">
-            <p style="margin: 0; font-size: 13px; color: #475569;">
-              <strong>Selection Preview:</strong> {{ selectedLearner || 'None' }} — {{ selectedReportType || 'None' }}
-            </p>
-          </div>
-        }
+          @if (selectedLearner || selectedReportType) {
+            <ion-item color="light" class="preview-box" style="margin-bottom: 16px; border-radius: 8px;">
+              <ion-label class="ion-text-wrap" style="font-size: 13px; color: #475569;">
+                <strong>Selection Preview:</strong> {{ selectedLearner || 'None' }} — {{ selectedReportType || 'None' }}
+              </ion-label>
+            </ion-item>
+          }
+        </ion-list>
 
         <div class="form-actions">
-          <!-- Property Binding: [disabled] -->
-          <button
-            type="submit"
-            class="submit-btn"
-            [disabled]="!selectedLearner || !selectedReportType"
-          >
+          <ion-button type="submit" expand="block" class="submit-btn" [disabled]="!selectedLearner || !selectedReportType">
             Submit Report
-          </button>
+          </ion-button>
         </div>
       </form>
-    </div>
-  </div>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

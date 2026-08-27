@@ -7,7 +7,10 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  padding: 24px 12px;
+  padding: 24px 16px;
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
 }
 
 .report-card {
@@ -16,27 +19,45 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
   border: 1px solid #e2e8f0;
   width: 100%;
-  max-width: 440px;
+  max-width: 560px;
   padding: 28px 24px;
 }
 
 .card-header {
-  margin-bottom: 24px;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+  margin-bottom: 20px !important;
+  padding: 0 !important;
+  width: 100% !important;
 }
 
-.card-title {
-  font-size: 22px;
-  font-weight: 700;
-  color: #0f172a;
-  margin: 0 0 6px 0;
-  letter-spacing: -0.3px;
+.card-title,
+ion-card-title.card-title {
+  order: 1 !important;
+  font-size: 24px !important;
+  font-weight: 700 !important;
+  color: #0f172a !important;
+  margin: 0 0 4px 0 !important;
+  letter-spacing: -0.3px !important;
+  line-height: 1.2 !important;
+  text-align: center !important;
+  width: 100% !important;
 }
 
-.card-subtitle {
-  font-size: 14px;
-  color: #64748b;
-  margin: 0;
-  line-height: 1.4;
+.card-subtitle,
+ion-card-subtitle.card-subtitle {
+  order: 2 !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  color: #64748b !important;
+  margin: 0 !important;
+  line-height: 1.4 !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+  text-align: center !important;
+  width: 100% !important;
 }
 
 .report-form {
